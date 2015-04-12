@@ -22,10 +22,10 @@
 </div>
 <div id="divPictures">
     <div class="floated_img" ng-repeat="item in subreddit_list">
-        <a href="{{item.url}}"><img src="{{item.thumb_url}}"  class="floated_img" alt="reddit" height="150" width="150"/></a>
+        <a href="{{item.url}}"><img ng-src="{{item.thumb_url}}"  class="floated_img" alt="reddit" height="150" width="150"/></a>
     </div>
 </div>
-<div id="divDebug" style="color: Red; float: left;" ng-bind-html="DebugOutput | unsafe">
+<div id="divDebug" style="color: Red; clear: both;" ng-bind-html="DebugOutput | unsafe">
 </div>
 </body>
 </html>
