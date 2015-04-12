@@ -21,7 +21,10 @@
             }
             $scope.DebugOutput = $scope.DebugOutput + msg + "<hr />"
         };
+
+        // initialize scope variables
         $scope.subreddit_list = null;
+        $scope.last_name = null;
 
         var processResponse = function(response) {
             var data = response.data.data.children;
@@ -43,10 +46,12 @@
                    }
                    console.log('thumbnail_url = ' + thumbnail_url);
                    subreddit_list.push(new RedditEntry(item_data.title, subreddit, item_data.permalink, item_data.url, thumbnail_url));
+                   $scope.last_name = item_data.name;
                }
             });
             if (showDebug) {
                 console.log(subreddit_list);
+                addMessage("Last_name = " + $scope.last_name);
             }
             $scope.subreddit_list = subreddit_list;
 
