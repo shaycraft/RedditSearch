@@ -12,6 +12,10 @@
             $scope.DebugOutput = $scope.DebugOutput + msg + "<br />"
         };
 
+        var processResponse = function(response) {
+            addMessage('Resposne = ' + JSON.stringify(response.data));
+        }
+
         $scope.clearMessage = function() {
             $scope.DebugOutput = "";
         };
@@ -19,7 +23,9 @@
         addMessage('Test message');
 
         $scope.getPhotoFeed = function(txtRedditUser) {
-
+            addMessage("getting media feed for user " + txtRedditUser);
+            var requestUrl = 'https://www.reddit.com/user/' + txtRedditUser + '/submitted.json';
+            $http.get(requestUrl).then(processResponse);
         };
 
     }]);
