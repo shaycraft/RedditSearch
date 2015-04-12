@@ -61,12 +61,22 @@
             $scope.DebugOutput = "";
         };
 
-        addMessage('Test message');
 
         $scope.getPhotoFeed = function(txtRedditUser) {
+            $scope.subreddit_list = [];
+
             showDebug = $scope.chkDebug;
             addMessage("getting media feed for user " + txtRedditUser);
-            var requestUrl = 'https://www.reddit.com/user/' + txtRedditUser + '/submitted.json';
+            var requestUrl = "";
+            if ($scope.last_name) {
+                requestUrl = 'https://www.reddit.com/user/' + txtRedditUser + '/submitted.json?count=25&after=' + $scope.last_name;
+            }
+            else {
+                requestUrl = 'https://www.reddit.com/user/' + txtRedditUser + '/submitted.json';
+            }
+            if (showDebug) {
+                addMessage('Initiating call to ' + requestUrl);
+            }
             $http.get(requestUrl).then(processResponse);
         };
 

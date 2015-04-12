@@ -24,6 +24,7 @@
     <div class="floated_img" ng-repeat="item in subreddit_list">
         <a href="{{item.url}}"><img ng-src="{{item.thumb_url}}"  class="floated_img" alt="reddit" height="150" width="150"/></a>
     </div>
+    <a href="javascript:void));" ng-click="clearMessage();getPhotoFeed(txtRedditUser)">Next</a>
 </div>
 <div id="divDebug" style="color: Red; clear: both;" ng-bind-html="DebugOutput | unsafe">
 </div>
