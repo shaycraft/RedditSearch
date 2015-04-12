@@ -10,7 +10,9 @@
 <body ng-controller="RedditController">
 <div id="divInput">
     <form ng-submit="clearMessage(); getPhotoFeed(txtRedditUser)">
-        <span>Twitter Id:</span><input type="text" id="txtRedditUser" ng-model="txtRedditUser" /><input type="submit" />
+        <span>Twitter Id:</span><input type="text" id="txtRedditUser" ng-model="txtRedditUser" />
+        <input type="checkbox" ng-model="chkDebug" />Debug?<br />
+        <input type="submit" />
     </form>
 </div>
 <div id="divDebug" style="color: Red;" ng-bind-html="DebugOutput | unsafe">
