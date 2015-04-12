@@ -2,6 +2,15 @@
  * Created by Sam on 4/11/2015.
  */
 (function() {
+    var RedditEntry = function(title, subreddit_name, permalink, url, thumb_url)
+    {
+        this.title = title;
+        this.subreddit_name = subreddit_name;
+        this.permalink = permalink;
+        this.url = url;
+        this.thumb_url = thumb_url;
+    };
+
     var showDebug = false;
     var mod = angular.module('RedditSearch', []);
     mod.controller('RedditController', ['$scope', '$http',
@@ -16,9 +25,30 @@
         var processResponse = function(response) {
             var data = response.data.data.children;
             if (showDebug) {
-                addMessage('Response = ' + JSON.stringify(data));
-                console.log(data);
+               data.forEach(function(item) {
+                   addMessage('<hr />');
+                   addMessage(JSON.stringify(item));
+                   console.log(item);
+               });
             }
+
+            var subreddit_list = [];
+            data.forEach(function(item) {
+               if (item.kind == 't3') {
+                   var item_data = item.data;
+                   var subreddit = item_data.subreddit;
+                   var thumbnail_url = item_data.url;
+                   if (thumbnail_url == 'nsfw') {
+                       thumbnail_url = item_data.media.oembed.thumbnail_url;
+                   }
+                   subreddit_list.push(new RedditEntry(item_data.title, subreddit, item_data.permalink, item_data.url, thumbnail_url));
+               }
+            });
+            if (showDebug) {
+                console.log(subreddit_list);
+            }
+
+
         }
 
         $scope.clearMessage = function() {
