@@ -47,9 +47,9 @@
             if (showDebug) {
                 console.log(subreddit_list);
             }
+            $scope.subreddit_list = subreddit_list;
 
-
-        }
+        };
 
         $scope.clearMessage = function() {
             $scope.DebugOutput = "";
