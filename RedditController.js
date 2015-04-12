@@ -19,14 +19,14 @@
             if (!$scope.DebugOutput) {
                 $scope.DebugOutput = "";
             }
-            $scope.DebugOutput = $scope.DebugOutput + msg + "<br />"
+            $scope.DebugOutput = $scope.DebugOutput + msg + "<hr />"
         };
+        $scope.subreddit_list = null;
 
         var processResponse = function(response) {
             var data = response.data.data.children;
             if (showDebug) {
                data.forEach(function(item) {
-                   addMessage('<hr />');
                    addMessage(JSON.stringify(item));
                    console.log(item);
                });
@@ -38,9 +38,10 @@
                    var item_data = item.data;
                    var subreddit = item_data.subreddit;
                    var thumbnail_url = item_data.url;
-                   if (thumbnail_url == 'nsfw') {
+                   if (thumbnail_url == 'nsfw' || thumbnail_url.indexOf('.jpg') < 0 && item_data.media) {
                        thumbnail_url = item_data.media.oembed.thumbnail_url;
                    }
+                   console.log('thumbnail_url = ' + thumbnail_url);
                    subreddit_list.push(new RedditEntry(item_data.title, subreddit, item_data.permalink, item_data.url, thumbnail_url));
                }
             });
