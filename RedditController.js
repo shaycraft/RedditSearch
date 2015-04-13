@@ -44,7 +44,6 @@
                    if (thumbnail_url == 'nsfw' || thumbnail_url.indexOf('.jpg') < 0 && item_data.media) {
                        thumbnail_url = item_data.media.oembed.thumbnail_url;
                    }
-                   console.log('thumbnail_url = ' + thumbnail_url);
                    subreddit_list.push(new RedditEntry(item_data.title, subreddit, item_data.permalink, item_data.url, thumbnail_url));
                    $scope.last_name = item_data.name;
                }
