@@ -12,9 +12,9 @@
     };
 
     var showDebug = false;
-    var mod = angular.module('RedditSearch', []);
-    mod.controller('RedditController', ['$scope', '$http',
-    function($scope, $http) {
+    var mod = angular.module('RedditSearch', ['ngResource']);
+    mod.controller('RedditController', ['$scope', '$resource',
+    function($scope, $resource) {
         var addMessage = function(msg) {
             if (!$scope.DebugOutput) {
                 $scope.DebugOutput = "";
@@ -27,7 +27,7 @@
         $scope.last_name = null;
 
         var processResponse = function(response) {
-            var data = response.data.data.children;
+            var data = response.data.children;
             if (showDebug) {
                data.forEach(function(item) {
                    addMessage(JSON.stringify(item));
@@ -76,7 +76,8 @@
             if (showDebug) {
                 addMessage('Initiating call to ' + requestUrl);
             }
-            $http.get(requestUrl).then(processResponse);
+            var redditFeed = $resource(requestUrl);
+            redditFeed.get(processResponse);
         };
 
     }]);
