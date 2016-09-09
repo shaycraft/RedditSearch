@@ -15,7 +15,7 @@
 <body ng-controller="RedditController">
 <div id="divInput">
     <form ng-submit="clearMessage(); getPhotoFeed(txtRedditUser)">
-        <span>Twitter Id:</span><input type="text" id="txtRedditUser" ng-model="txtRedditUser" />
+        <span>Reddit username:</span><input type="text" id="txtRedditUser" ng-model="txtRedditUser" />
         <input type="checkbox" ng-model="chkDebug" />Debug?<br />
         <input type="submit" />
     </form>
@@ -23,6 +23,7 @@
 <div id="divPictures">
     <div class="floated_img" ng-repeat="item in subreddit_list">
         <a href="{{item.url}}"><img ng-src="{{item.thumb_url}}"  class="floated_img" alt="reddit" height="150" width="150"/></a>
+        <a target="_blank" ng-href="https://www.reddit.com/{{item.permalink}}">link</a>
     </div>
     <a href="javascript:void(0);" ng-click="clearMessage();getPhotoFeed(txtRedditUser)">Next</a>
 </div>
